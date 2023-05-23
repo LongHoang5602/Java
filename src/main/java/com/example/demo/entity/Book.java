@@ -25,7 +25,7 @@ public class Book {
     private String author;
 
     @Column(name = "image")
-    // @NotBlank(message = "Không được để trống")
+    @NotBlank(message = "Không được để trống")
     private String image;
 
     @Column(name = "price")

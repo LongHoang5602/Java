@@ -9,7 +9,7 @@
 <th:block th:replace="layout :: header"></th:block>
 <div class="container">
   <h1>Edit Book</h1>
-  <form th:action="@{/books/edit}" th:object="${book}" method="post">
+  <form th:action="@{/books/edit}" th:object="${book}" class="form" method="post">
     <input type="hidden" th:field="*{id}">
     <div class="col-6 rab-3">
       <label class="form-label" for="title">Title:</label>
@@ -23,11 +23,22 @@
       <label class="form-label" for="price">Price:</label>
       <input class="form-control" type="text" th:field="*{price}" id="price">
     </div>
-    <div class="col-6 nb-3">
-      <label class="form-label" for="category">Category:</label>
-      <input class="form-control" type="text" th:field="*{category}" id="category">
+    <div class="col-6 mb-3">
+      <label class="form-label" for="image">Image:</label>
+      <input class="form-control" type="text" th:field="*{image}" id="image">
+      <!-- <input class="form-control" type="file" id="image" name="image" accept="image/png,image/jpeg"> -->
+      <span class="alert alert-warning" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
     </div>
-    <input type="submit" value="Save">
+    <div class="col-6 mb-3">
+      <label class="form-label" for="category">Category:</label>
+      <select class="form-control" id="category" name="category.id"  >
+        <option value="">--Select list</option>
+        <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+
+      </select>
+      <!-- <input class="form-control" type="text" th:field="*{category}" id="category"> -->
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save">
   </form>
   <br>
   <a th:href="@{/books}">Back to List</a>
@@ -35,3 +46,8 @@
 <th:block th:replace="layout :: footer"></th:block>
 </body>
 </html>
+<script>
+  document.querySelector('form').addEventListener('submit', function() {
+    th:action="@{/books}";
+  });
+</script>

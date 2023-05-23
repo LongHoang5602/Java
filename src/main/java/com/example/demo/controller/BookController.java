@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Book;
+import com.example.demo.entity.Category;
 import com.example.demo.services.BookService;
+import com.example.demo.services.CategoryService;
 
 import jakarta.validation.Valid;
 
@@ -29,10 +34,13 @@ import jakarta.validation.Valid;
 public class BookController {
     @Autowired
     private BookService bookService;
+    @Autowired
+    private CategoryService cateService;
 
     @GetMapping
     public String showAllBooks(Model model) {
         List<Book> listBook = bookService.getAllBooks();
+
         model.addAttribute("listBook", listBook);
         return "book/list";
 
@@ -40,6 +48,8 @@ public class BookController {
 
     @GetMapping("/add")
     public String add(Model model) {
+        List<Category> listCate = cateService.getAllCates();
+        model.addAttribute("categories", listCate);
         model.addAttribute("book", new Book());
         return "book/add";
     }
@@ -67,4 +77,38 @@ public class BookController {
         bookService.addBook(newBook);
         return "redirect:/books";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editBookForm(@PathVariable("id") int id, Model model) {
+        List<Category> listCate = cateService.getAllCates();
+        Optional<Book> editBook = bookService.getAllBooks().stream().filter(p -> p.getId() == id).findFirst();
+        if (editBook.isPresent()) {
+            model.addAttribute("categories", listCate);
+            model.addAttribute("book", editBook.get());
+            return "book/edit";
+        } else {
+            return "not-found";
+        }
+
+    }
+
+    @PostMapping("/edit")
+    public String editBook(@ModelAttribute("book") @Valid Book updateBook,
+            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("book", new Book());
+            return "book/edit";
+        }
+        bookService.updateBook(updateBook);
+
+        return "redirect:/books";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable("id") Long id) {
+        bookService.deleteBook(id);
+        return "redirect:/books";
+
+    }
+
 }

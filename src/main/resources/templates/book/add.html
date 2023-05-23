@@ -24,33 +24,38 @@
     <div class="col-6 mb-3">
       <label class="form-label" for="id">Id:</label>
       <input class="form-control" type="text" th:field="*{id}" id="id">
-      <div class="alert alert-warning" th:if="${#fields.hasErrors('id')}"th:errors="*{id}"></div>
+      <span class="alert alert-warning" th:if="${#fields.hasErrors('id')}"th:errors="*{id}"></span>
     </div>
     <div class="col-6 mb-3">
       <label class="form-label" for="title">Title:</label>
       <input class="form-control" type="text" th:field="*{title}" id="title">
-      <div class="alert alert-warning" th:if="${#fields.hasErrors('title')}"th:errors="*{title}"></div>
+      <span class="alert alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+      
     </div>
     <div class="col-6 mb-3">
       <label class="form-label" for="author">Author:</label>
       <input class="form-control" type="text" th:field="*{author}" id="author">
-      <div class="alert alert-warning" th:if="${#fields.hasErrors('author')}"th:errors="*{author}"></div>
+      <span class="alert alert-warning" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
     </div>
     <div class="col-6 mb-3">
       <label class="form-label" for="price">Price:</label>
       <input class="form-control" type="text" th:field="*{price}" id="price">
-      <div class="alert alert-warning" th:if="${#fields.hasErrors('price')}"th:errors="*{price}"></div>
+      <span class="alert alert-warning" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
     </div>
     <div class="col-6 mb-3">
       <label class="form-label" for="image">Image:</label>
       <input class="form-control" type="text" th:field="*{image}" id="image">
       <!-- <input class="form-control" type="file" id="image" name="image" accept="image/png,image/jpeg"> -->
-
-      <div class="alert alert-warning" th:if="${#fields.hasErrors('image')}"th:errors="*{image}"></div>
+      <span class="alert alert-warning" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
     </div>
     <div class="col-6 mb-3">
       <label class="form-label" for="category">Category:</label>
-      <input class="form-control" type="text" th:field="*{category}" id="category">
+      <select class="form-control" id="category" name="category.id">
+        <option value="">--Select list</option>
+        <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+
+      </select>
+      <!-- <input class="form-control" type="text" th:field="*{category}" id="category"> -->
     </div>
     <input type="submit" class="btn btn-primary" value="Save" >
   </form>
