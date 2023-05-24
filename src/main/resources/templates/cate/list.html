@@ -14,24 +14,15 @@ xmlns:th="http://www.thymeleaf.org">|
   <table class="table">
     <tr>
       <th>STT</th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Price</th>
-      <th>Image</th>
-      <th>Category</th>
+      <th>Name</th>
       <th>Action</th>
     </tr>
-    <tr th:each="book,i : ${listBook}">
-      <!-- <td th:text="${book.id}"></td> -->
+    <tr th:each="cate,i : ${listCate}">
       <td th:text="${#numbers.sequence(1, 1000)[i.index]}"></td>
-      <td th:text="${book.title}"></td>
-      <td th:text="${book.author}"></td>
-      <td th:text="${book.price}"></td>
-      <td th:text="${book.image}"></td>
-      <td th:text="${book.category.name}"></td>
+      <td th:text="${cate.name}"></td>
       <td>
-        <a th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a>
-        <a th:href="@{/books/delete/{id}(id=${book.id})}"
+        <a th:href="@{/cates/edit/{id}(id=${cate.id})}">Edit</a>
+        <a th:href="@{/cates/delete/{id}(id=${cate.id})}"
            onclick="return confirm('Are you sure?')">Delete</a>
 
       </td>

@@ -1,26 +1,13 @@
 package com.example.demo.controller;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entity.Book;
 import com.example.demo.entity.Category;
@@ -40,7 +27,6 @@ public class BookController {
     @GetMapping
     public String showAllBooks(Model model) {
         List<Book> listBook = bookService.getAllBooks();
-
         model.addAttribute("listBook", listBook);
         return "book/list";
 
@@ -57,7 +43,8 @@ public class BookController {
     @PostMapping("/add")
     public String add(@Valid Book newBook, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("book", new Book());
+            List<Category> listCate = cateService.getAllCates();
+            model.addAttribute("categories", listCate);
             return "book/add";
         }
         // if (imageBook != null && imageBook.getSize() > 0) {
@@ -96,7 +83,6 @@ public class BookController {
     public String editBook(@ModelAttribute("book") @Valid Book updateBook,
             BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("book", new Book());
             return "book/edit";
         }
         bookService.updateBook(updateBook);

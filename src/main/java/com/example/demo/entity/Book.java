@@ -1,10 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
@@ -13,19 +10,18 @@ import lombok.Data;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Max(value = 1000, message = "Giá trị không hợp lệ")
     private Long id;
 
     @Column(name = "title")
-    @NotBlank(message = "Không được để trống")
+    @NotEmpty(message = "Không được để trống")
     private String title;
 
     @Column(name = "author")
-    @NotBlank(message = "Không được để trống")
+    @NotEmpty(message = "Không được để trống")
     private String author;
 
     @Column(name = "image")
-    @NotBlank(message = "Không được để trống")
+    @NotEmpty(message = "Không được để trống")
     private String image;
 
     @Column(name = "price")
