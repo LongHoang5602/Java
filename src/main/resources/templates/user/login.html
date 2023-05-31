@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <th:block th:replace="layout::link-css"></th:block>
+  <title>Login</title>
+  <style>
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <th:block th:replace="layout :: header"></th:block>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <form th:action="@{/login}" method="post">
+          <fieldset>
+            <legend>Please Login</legend>
+            <div th:if="${param.error}" class="text-danger">
+              Invalid Username or Password
+            </div>
+            <div th:if="${param.logout}" class="text-success">
+              You have been logged out
+            </div>
+            <div class=" mb-3">
+              <label class="form-label" for="username">Username:</label>
+              <input class="form-control" type="text" th:field="*{username}" id="username">
+            </div>
+            <div class=" mb-3">
+              <label class="form-label" for="password">Password:</label>
+              <input class="form-control" type="text" th:field="*{password}" id="password">
+            </div>
+            <div class=" mb-3">
+              <input type="checkbox" name="remember-me" id="remember-me">
+              <label for="remember-me">Remember me</label>
+            </div>
+            <div class="d-grid gap-2 form-action">
+              <button type="submit" class="btn btn-primary">Login</button>
+              <a class="text-primary text-center" href="/register">Don't have account. Sign up?</a>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  <th:block th:replace="layout :: footer"></th:block>
+</body>
+
+</html>
