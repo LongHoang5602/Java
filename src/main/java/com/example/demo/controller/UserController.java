@@ -20,8 +20,20 @@ public class UserController {
     @GetMapping("/login")
     public String login() {
         return "user/login";
-
     }
+
+    // @PostMapping("/login")
+    // public String processLogin(@RequestParam String username, @RequestParam
+    // String password, Model model) {
+    // User user = userService.findByUsername(username);
+    // if (user == null || !user.getPassword().equals(password)) {
+    // model.addAttribute("error", "Invalid username or password");
+    // return "login";
+    // } else {
+    // // Đăng nhập thành công, thực hiện các xử lý khác tại đây
+    // return "redirect:/home";
+    // }
+    // }
 
     @GetMapping("/register")
     public String register(Model model) {
@@ -33,11 +45,13 @@ public class UserController {
     public String register(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors()
-                    .forEach(error -> model.addAttribute(error.getField() + " Error:", error.getDefaultMessage()));
+                    .forEach(error -> model.addAttribute(error.getField() + " _error", error.getDefaultMessage()));
             return "user/register";
         }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        System.out.println(user);
         userService.save(user);
+        System.out.println(user);
         return "redirect:/login";
     }
 }

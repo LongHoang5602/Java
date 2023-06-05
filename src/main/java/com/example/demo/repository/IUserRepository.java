@@ -9,6 +9,6 @@ import com.example.demo.entity.User;
 @Repository
 public interface IUserRepository extends JpaRepository<User, Long> {
 
-    @Query("Select u from User u Where u.username= ?1")
+    @Query("SELECT u FROM User u WHERE u.username = ?1")
     User findByUsername(String username);
 }

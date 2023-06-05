@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.validator.ValidUsername;
+import com.example.demo.validator.annotation.ValidUsername;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -23,7 +23,7 @@ public class User {
     @ValidUsername
     private String username;
 
-    @Column(name = "password", length = 50, nullable = false)
+    @Column(name = "password", length = 250, nullable = false)
     @NotBlank(message = "Không được để trống")
     private String password;
 

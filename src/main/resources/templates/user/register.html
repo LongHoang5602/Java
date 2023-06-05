@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <th:block th:replace="layout::link-css"></th:block>
+  <th:block th:replace="~{layout::link-css}"></th:block>
   <title>Login</title>
   <style>
     .button {
@@ -18,12 +18,12 @@
 </head>
 
 <body>
-  <th:block th:replace="layout :: header"></th:block>
+  <th:block th:replace="~{layout :: header}"></th:block>
 
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-8">
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/register}" th:object="${user}" method="post">
           <fieldset>
             <legend>Please Login</legend>
             <div th:if="${param.error}" class="text-danger">
@@ -49,18 +49,18 @@
             </div>
             <div class=" mb-3">
               <label class="form-label" for="password">Password:</label>
-              <input class="form-control" type="text" th:field="*{password}" id="password">
+              <input class="form-control" type="password" th:field="*{password}" id="password">
               <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
             </div>
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary">Login</button>
+              <button type="submit" class="btn btn-primary">Register</button>
             </div>
           </fieldset>
         </form>
       </div>
     </div>
   </div>
-  <th:block th:replace="layout :: footer"></th:block>
+  <th:block th:replace="~{layout :: footer}"></th:block>
 </body>
 
 </html>

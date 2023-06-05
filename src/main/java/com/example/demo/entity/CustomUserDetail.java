@@ -8,11 +8,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.repository.IUserRepository;
 
-public class CustomerUserDetail implements UserDetails {
+public class CustomUserDetail implements UserDetails {
     private final User user;
     private final IUserRepository userRepository;
 
-    public CustomerUserDetail(User user, IUserRepository userRepository) {
+    public CustomUserDetail(User user, IUserRepository userRepository) {
         this.user = user;
         this.userRepository = userRepository;
     }

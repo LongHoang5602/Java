@@ -1,6 +1,7 @@
-package com.example.validator;
+package com.example.demo.validator;
 
 import com.example.demo.entity.User;
+import com.example.demo.validator.annotation.ValidUserId;
 
 import jakarta.validation.*;
 

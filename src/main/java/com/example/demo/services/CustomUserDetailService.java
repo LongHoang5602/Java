@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.CustomerUserDetail;
+import com.example.demo.entity.CustomUserDetail;
 import com.example.demo.entity.User;
 import com.example.demo.repository.IUserRepository;
 
-public class CustomerUserDetailService implements UserDetailsService {
+@Service
+public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     private IUserRepository userRepository;
 
@@ -19,6 +21,7 @@ public class CustomerUserDetailService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new CustomerUserDetail(user, userRepository);
+        return new CustomUserDetail(user, userRepository);
     }
+
 }

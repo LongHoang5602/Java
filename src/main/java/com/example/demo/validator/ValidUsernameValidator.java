@@ -1,8 +1,9 @@
-package com.example.validator;
+package com.example.demo.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.repository.IUserRepository;
+import com.example.demo.validator.annotation.ValidUsername;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
