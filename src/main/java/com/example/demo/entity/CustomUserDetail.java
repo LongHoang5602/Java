@@ -1,9 +1,13 @@
 package com.example.demo.entity;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.repository.IUserRepository;
@@ -19,7 +23,8 @@ public class CustomUserDetail implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        return Arrays.stream(userRepository.getRolesofUser(user.getId())).map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
     }
 
     @Override

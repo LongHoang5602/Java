@@ -22,19 +22,6 @@ public class UserController {
         return "user/login";
     }
 
-    // @PostMapping("/login")
-    // public String processLogin(@RequestParam String username, @RequestParam
-    // String password, Model model) {
-    // User user = userService.findByUsername(username);
-    // if (user == null || !user.getPassword().equals(password)) {
-    // model.addAttribute("error", "Invalid username or password");
-    // return "login";
-    // } else {
-    // // Đăng nhập thành công, thực hiện các xử lý khác tại đây
-    // return "redirect:/home";
-    // }
-    // }
-
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());

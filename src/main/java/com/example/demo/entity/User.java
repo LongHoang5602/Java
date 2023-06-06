@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.example.demo.validator.annotation.ValidUsername;
 
@@ -36,6 +38,10 @@ public class User {
     @Size(max = 50, message = "Không được lớn hơn 50 ký tự")
     @NotBlank(message = "Không được để trống")
     private String name;
+
+    @ManyToMany
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
