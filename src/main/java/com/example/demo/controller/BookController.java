@@ -47,20 +47,6 @@ public class BookController {
             model.addAttribute("categories", listCate);
             return "book/add";
         }
-        // if (imageBook != null && imageBook.getSize() > 0) {
-        // try {
-        // File saveFile = new ClassPathResource("static/images").getFile();
-        // String newImageFile = UUID.randomUUID() + ".png";
-        // Path path = Paths.get(saveFile.getAbsolutePath() + File.separator +
-        // newImageFile);
-        // Files.copy(imageBook.getInputStream(), path,
-        // StandardCopyOption.REPLACE_EXISTING);
-        // newBook.setImage(newImageFile);
-        // } catch (Exception ex) {
-        // ex.printStackTrace();
-        // }
-        // }
-
         bookService.addBook(newBook);
         return "redirect:/books";
     }

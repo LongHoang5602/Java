@@ -22,13 +22,9 @@ public class Role {
     @Size(max = 50, message = "Nhập dưới 50 ký tự")
     private String name;
 
-    @Column(name = "desc")
+    @Column(name = "description")
     @Size(max = 250, message = "Nhập dưới 250 ký tự")
-    private String desc;
-
-    @Column(name = "image")
-    @NotEmpty(message = "Không được để trống")
-    private String image;
+    private String description;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users = new HashSet<>();
