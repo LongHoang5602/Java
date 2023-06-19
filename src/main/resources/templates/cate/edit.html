@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <th:block th:replace="layout :: header"></th:block>
+  <th:block th:replace="~{layout :: header}"></th:block>
   <div class="container">
     <h1>Edit Category</h1>
     <form th:action="@{/cates/add}" th:object="${cate}" method="post">
@@ -36,7 +36,7 @@
     <br>
 
   </div>
-  <th:block th:replace="layout :: footer"></th:block>
+  <th:block th:replace="~{layout :: footer}"></th:block>
 </body>
 
 </html>

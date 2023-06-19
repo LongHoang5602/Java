@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cart Shopping</title>
+    <style>
+        table {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        tr:first-child {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td,
+        th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        th:first-child {
+            width: 5%;
+        }
+
+        th:nth-child(2) {
+            width: 30%;
+        }
+
+        th:nth-child(3) {
+            width: 20%;
+        }
+
+        th:nth-child(4) {
+            width: 15%;
+        }
+
+        th:nth-child(5) {
+            width: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Tổng giá tiền</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product,i : ${CartItem}">
+                <form action="/shopping-cart/update" method="post">
+                    <td th:text="${#numbers.sequence(1, 1000)[i.index]}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td>
+                        <input type="number" th:value="${product.qty}" onblur="this.form.submit"
+                            th:attr="data-product-id=${product.productId}" onchange="updateQuantity(this)">
+                    </td>
+                    <td th:text="${product.price * product.qty}"></td>
+                    <td>
+                        <button th:attr="data-product-id=${product.productId}"
+                            onclick="removeProduct(this)">Remove</button>
+                    </td>
+                </form>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align: right;">Tổng giá tiền:</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</body>

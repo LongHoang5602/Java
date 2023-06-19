@@ -5,11 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Product List</title>
-  <th:block th:replace="layout :: link-css"></th:block>
+  <th:block th:replace="~{layout :: link-css}"></th:block>
 </head>
 
 <body>
-  <th:block th:replace="layout :: header"></th:block>
+  <th:block th:replace="~{layout :: header}"></th:block>
   <div class="container">
     <h1 th:text=${title}></h1>
     <table class="table">
@@ -43,7 +43,9 @@
           <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
           <a th:href="@{/products/delete/{id}(id=${product.id})}" onclick="deleteProduct(this); return false;"
             class="text-danger">Delete</a>
-
+        </td>
+        <td sec:authorize!="hasAnyAuthority('ADMIN')">
+          <a th:href="@{/shopping-cart/add/{id}(id=${product.id})}">Buy Now</a>
         </td>
       </tr>
     </table>
@@ -67,7 +69,7 @@
       }
     }
   </script>
-  <th:block th:replace="layout :: footer"></th:block>
+  <th:block th:replace="~{layout :: footer}"></th:block>
 </body>
 
 </html>

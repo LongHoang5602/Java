@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <th:block th:replace="layout :: header"></th:block>
+  <th:block th:replace="~{layout :: header}"></th:block>
   <div class="container">
     <h1>Add Product</h1>
     <form th:action="@{/products/add}" th:object="${product}" method="post" enctype="multipart/form-data">
@@ -53,7 +53,7 @@
     <br>
 
   </div>
-  <th:block th:replace="layout :: footer"></th:block>
+  <th:block th:replace="~{layout :: footer}"></th:block>
 </body>
 
 </html>

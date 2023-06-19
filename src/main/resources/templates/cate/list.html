@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="en"
-xmlns:th="http://www.thymeleaf.org">|
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Book List</title>
-  <th:block th:replace="layout :: link-css"></th:block>
-</head>
-<body>
-<th:block th:replace="layout :: header"></th:block>
-<div class="container">
-  <h1 th:text=${title}></h1>
-  <table class="table">
-    <tr>
-      <th>STT</th>
-      <th>Name</th>
-      <th>Action</th>
-    </tr>
-    <tr th:each="cate,i : ${listCate}">
-      <td th:text="${#numbers.sequence(1, 1000)[i.index]}"></td>
-      <td th:text="${cate.name}"></td>
-      <td>
-        <a th:href="@{/cates/edit/{id}(id=${cate.id})}">Edit</a>
-        <a th:href="@{/cates/delete/{id}(id=${cate.id})}"
-           onclick="return confirm('Are you sure?')">Delete</a>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">|
 
-      </td>
-    </tr>
-  </table>
-</div>
-<th:block th:replace="layout :: footer"></th:block>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Book List</title>
+  <th:block th:replace="~{layout :: link-css}"></th:block>
+</head>
+
+<body>
+  <th:block th:replace="~{layout :: header}"></th:block>
+  <div class="container">
+    <h1 th:text=${title}></h1>
+    <table class="table">
+      <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+      <tr th:each="cate,i : ${listCate}">
+        <td th:text="${#numbers.sequence(1, 1000)[i.index]}"></td>
+        <td th:text="${cate.name}"></td>
+        <td>
+          <a th:href="@{/cates/edit/{id}(id=${cate.id})}">Edit</a>
+          <a th:href="@{/cates/delete/{id}(id=${cate.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+  <th:block th:replace="~{layout :: footer}"></th:block>
 </body>
+
 </html>

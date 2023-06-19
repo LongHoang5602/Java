@@ -12,26 +12,26 @@ import com.example.demo.repository.IProductRepository;
 @Service
 public class ProductService {
     @Autowired
-    private IProductRepository bookRepository;
+    private IProductRepository productRepository;
 
     public List<Product> getAllProducts() {
-        return bookRepository.findAll();
+        return productRepository.findAll();
     }
 
     public Product getProductById(Long id) {
-        Optional<Product> optional = bookRepository.findById(id);
+        Optional<Product> optional = productRepository.findById(id);
         return optional.orElse(null);
     }
 
     public void addProduct(Product newProduct) {
-        bookRepository.save(newProduct);
+        productRepository.save(newProduct);
     }
 
     public void updateProduct(Product newProduct) {
-        bookRepository.save(newProduct);
+        productRepository.save(newProduct);
     }
 
     public void deleteProduct(Long id) {
-        bookRepository.deleteById(id);
+        productRepository.deleteById(id);
     }
 }
