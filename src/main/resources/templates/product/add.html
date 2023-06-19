@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <th:block th:replace="layout::link-css"></th:block>
-  <title>Add Book</title>
+  <title>Add Product</title>
   <style>
     .button {
       display: inline-block;
@@ -20,17 +20,17 @@
 <body>
   <th:block th:replace="layout :: header"></th:block>
   <div class="container">
-    <h1>Add Book</h1>
-    <form th:action="@{/books/add}" th:object="${book}" method="post">
+    <h1>Add Product</h1>
+    <form th:action="@{/products/add}" th:object="${product}" method="post" enctype="multipart/form-data">
       <div class="col-6 mb-3">
-        <label class="form-label" for="title">Title:</label>
-        <input class="form-control" type="text" th:field="*{title}" id="title">
-        <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+        <label class="form-label" for="name">Name:</label>
+        <input class="form-control" type="text" th:field="*{name}" id="name">
+        <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
       </div>
       <div class="col-6 mb-3">
-        <label class="form-label" for="author">Author:</label>
-        <input class="form-control" type="text" th:field="*{author}" id="author">
-        <span class="text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+        <label class="form-label" for="description">Description:</label>
+        <input class="form-control" type="text" th:field="*{description}" id="description">
+        <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
       </div>
       <div class="col-6 mb-3">
         <label class="form-label" for="price">Price:</label>
@@ -39,9 +39,8 @@
       </div>
       <div class="col-6 mb-3">
         <label class="form-label" for="image">Image:</label>
-        <input class="form-control" type="text" th:field="*{image}" id="image">
-        <!-- <input class="form-control" type="file" id="image" name="image" accept="image/png,image/jpeg"> -->
-        <span class="text-danger" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+        <!-- <input class="form-control" type="text" th:field="*{image}" id="image"> -->
+        <input class="form-control" type="file" id="image" name="file">
       </div>
       <div class="col-6 mb-3">
         <label class="form-label" for="category">Category:</label>
@@ -58,8 +57,3 @@
 </body>
 
 </html>
-<script>
-  document.querySelector('form').addEventListener('submit', function () {
-    th: action = "@{/books}";
-  });
-</script>

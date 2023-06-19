@@ -42,11 +42,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/", "/register", "/error")
                         .permitAll()
-                        .requestMatchers("/books/edit", "/books/delete")
+                        .requestMatchers("/products/edit/**", "/products/delete/**")
                         .hasAnyAuthority("ADMIN")
-                        .requestMatchers("/books", "/books/add")
-                        .hasAnyAuthority("ADMIN", "USER")
-                        .requestMatchers("/api/**")
+                        .requestMatchers("/products", "/products/add")
                         .hasAnyAuthority("ADMIN", "USER")
                         .anyRequest().authenticated())
                 .logout(logout -> logout.logoutUrl("/logout")

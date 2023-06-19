@@ -8,22 +8,21 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "book")
-public class Book {
+@Table(name = "product")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "name")
     @NotEmpty(message = "Không được để trống")
-    private String title;
+    private String name;
 
-    @Column(name = "author")
+    @Column(name = "description")
     @NotEmpty(message = "Không được để trống")
-    private String author;
+    private String description;
 
     @Column(name = "image")
-    @NotEmpty(message = "Không được để trống")
     private String image;
 
     @Column(name = "price")
