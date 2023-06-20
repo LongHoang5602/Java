@@ -20,14 +20,14 @@
 <body>
   <th:block th:replace="~{layout :: header}"></th:block>
   <div class="container">
-    <h1>Edit Book</h1>
-    <form th:action="@{/products/add}" th:object="${product}" method="post">
+    <h1>Edit Product</h1>
+    <form th:action="@{/products/add}" th:object="${product}" method="post" enctype="multipart/form-data">
       <div class="col-6 mb-3">
         <input class="form-control" type="hidden" th:field="*{id}" id="id">
         <span class="text-danger" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
       </div>
       <div class="col-6 mb-3">
-        <label class="form-label" for="name">Title:</label>
+        <label class="form-label" for="name">Name:</label>
         <input class="form-control" type="text" th:field="*{name}" id="name">
         <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
       </div>
@@ -43,9 +43,7 @@
       </div>
       <div class="col-6 mb-3">
         <label class="form-label" for="image">Image:</label>
-        <input class="form-control" type="text" th:field="*{image}" id="image">
-        <!-- <input class="form-control" type="file" id="image" name="image" accept="image/png,image/jpeg"> -->
-        <span class="text-danger" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+        <input class="form-control" type="file" id="image" name="file">
       </div>
       <div class="col-6 mb-3">
         <label class="form-label" for="category">Category:</label>

@@ -10,7 +10,7 @@
 
 <body>
   <th:block th:replace="~{layout :: header}"></th:block>
-  <div class="container">
+  <!-- <div class="container">
     <h1 th:text=${title}></h1>
     <table class="table">
       <tr>
@@ -23,16 +23,10 @@
         <th sec:authorize="hasAnyAuthority('ADMIN')">Action</th>
       </tr>
       <tr th:each=" product,i : ${listProduct}">
-        <!-- <td th:text="${product.id}"></td> -->
         <td th:text="${#numbers.sequence(1, 1000)[i.index]}"></td>
         <td th:text="${product.name}"></td>
         <td th:text="${product.description}"></td>
         <td th:text="${product.price}"></td>
-        <!-- <td th:text="${product.image}"></td> -->
-        <!-- <td><img th:src="@{C:/Users/nhoxl/Downloads/ImgProduct/} + ${product.image}"
-            style="width:100px; height: 100px" /></td> -->
-        <!-- <td><img th:src="@{'file:///C:/Users/nhoxl/Downloads/ImgProduct/' + ${product.image}}"
-            style="width:100px; height: 100px" /></td> -->
         <td th:if="${product.image!=null}"><img th:src="@{'/images/' + ${product.image}}"
             style="width:100px; height: 100px" /></td>
         <td th:if="${product.image==null}"><img th:src="@{'/images/vegetable.jfif' }"
@@ -49,7 +43,40 @@
         </td>
       </tr>
     </table>
-  </div>
+  </div> -->
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="col mb-5" th:each=" product,i : ${listProduct}">
+          <div class="card h-100">
+            <!-- Product image-->
+            <div th:if="${product.image!=null}">
+              <img class="card-img-top" th:src="@{'/images/' + ${product.image}}" style="width:266px; height: 150px" />
+            </div>
+            <div th:if="${product.image==null}">
+              <img class="card-img-top" th:src="@{'/images/vegetable.jfif' }" style="width:266px; height: 150px" />
+            </div>
+
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder" th:text="${product.name}"></h5>
+                <!-- Product price-->
+                <p th:text="${product.description}"></p>
+                <p th:text="${product.price} + VND"></p>
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                  th:href="@{/shopping-cart/add/{id}(id=${product.id})}">Buy Now</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <script th:src="@{/js/jquery-3.7.0.slim.min.js}"></script>
   <script th:inline="javascript">
     function deleteProduct(link) {

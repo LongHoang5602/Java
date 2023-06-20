@@ -25,19 +25,30 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                        <li class="nav-item" style="padding-top:25px ;">
                             <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
-                        <li class="nav-item"> <a class="nav-link " href="/products">List Product</a></li>
-                        <li class="nav-item"> <a class="nav-link " href="/cates">List Cate</a></li>
-                        <li class="nav-item"> <a class="nav-link " href="/products/add">Add Product </a></li>
-                        <li class="nav-item"> <a class="nav-link " href="/cates/add">Add Cate</a></li>
-                        <li sec:authorize="isAuthenticated()">
-                            <form th:action="@{/logout}" method="post">
+                        <li class="nav-item" style="padding-top:25px ;"> <a class=" nav-link " href=" /products">
+                                Store</a></li>
+                        <li sec:authorize="hasAnyAuthority('ADMIN')" class="nav-item" style="padding-top:25px ;"> <a
+                                class=" nav-link " href=" /products/admin">
+                                Manage</a></li>
+                        <div class="search" style="padding:30px;padding-left: 1100px;">
+                            <form action="/products/search">
+                                <input type="text" name="keyword" id="keyword" th:value="${keyword}"
+                                    placeholder="Search..." />
+                                <button type="submit">Search</button>
+                            </form>
+                        </div>
+                        <li class="nav-item" style="padding-top:10px ;"> <a href=" /shopping-cart"><img
+                                    class=" nav-link " src="/images/353403_cart_icon.png" /></a>
+                        </li>
+                        <li sec:authorize="isAuthenticated()" style="padding-top:25px ;">
+                            <form th:action=" @{/logout}" method="post">
                                 <button class="btn btn-outline-danger" type="submit">Logout</button>
                             </form>
                         </li>
-                        <li sec:authorize="!isAuthenticated()">
+                        <li sec:authorize="!isAuthenticated()" style="padding-top:25px ;">
                             <a class="btn btn-outline-primary" href="/login">Login</a>
                         </li>
                     </ul>

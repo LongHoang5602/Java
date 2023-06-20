@@ -26,6 +26,7 @@ public class CartController {
     @GetMapping("")
     public String viewCarts(Model model) {
         model.addAttribute("CartItem", shoppingCartService.getAllItem());
+        model.addAttribute("Total", shoppingCartService.getAmount());
         return "cart/view";
     }
 
@@ -49,19 +50,19 @@ public class CartController {
     @GetMapping("clear")
     public String clearCart() {
         shoppingCartService.clear();
-        return "redirect:/shopping-cart/";
+        return "redirect:/shopping-cart";
     }
 
     @GetMapping("del/{id}")
     public String removeCart(@PathVariable("id") Integer id) {
         shoppingCartService.remove(id);
-        return "redirect:/shopping-cart/";
+        return "redirect:/shopping-cart";
     }
 
-    @PostMapping("update/{id}")
-    public String updateCart(@PathVariable("id") Integer id, @RequestParam("qty") Integer qty) {
+    @PostMapping("update")
+    public String updateCart(@RequestParam("id") Integer id, @RequestParam("qty") Integer qty) {
         shoppingCartService.update(id, qty);
-        return "redirect:/shopping-cart/";
+        return "redirect:/shopping-cart";
     }
 
 }

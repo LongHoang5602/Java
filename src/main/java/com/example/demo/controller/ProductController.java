@@ -6,8 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +36,23 @@ public class ProductController {
         List<Product> listProduct = productService.getAllProducts();
         model.addAttribute("listProduct", listProduct);
         return "product/list";
+
+    }
+
+    @GetMapping("/products/search")
+    public String viewHomePage(Model model, @Param("keyword") String keyword) {
+        List<Product> listProduct = productService.listAll(keyword);
+        model.addAttribute("listProduct", listProduct);
+        model.addAttribute("keyword", keyword);
+
+        return "product/list";
+    }
+
+    @GetMapping("/admin")
+    public String showAllProductsAdmin(Model model) {
+        List<Product> listProduct = productService.getAllProducts();
+        model.addAttribute("listProduct", listProduct);
+        return "product/listAdmin";
 
     }
 
@@ -104,5 +123,16 @@ public class ProductController {
         return "redirect:/products";
 
     }
+
+    // @GetMapping("/products/search")
+    // public String searchProducts(@RequestParam("productName") String productName,
+    // Model model) {
+    // List<Product> listProduct = productService.getAllProducts().stream()
+    // .filter(p -> p.getName().equalsIgnoreCase(productName))
+    // .collect(Collectors.toList());
+    // System.out.println(listProduct);
+    // model.addAttribute("listProduct", listProduct);
+    // return "product/list";
+    // }
 
 }
