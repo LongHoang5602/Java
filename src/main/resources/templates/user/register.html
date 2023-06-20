@@ -84,14 +84,13 @@
 </head>
 
 <body>
-  <th:block th:replace="~{layout :: header}"></th:block>
 
   <div class="container">
     <div class="row justify-content-center" style="background-color: #d8ffff;height: 600px;
     width: 500px;
     margin: auto;
     color: #000000;
-    border-radius: 20px;">
+    border-radius: 20px;margin-top: 200px;">
       <div class="col-lg-6 col-md-8">
         <form th:action="@{/register}" th:object="${user}" method="post">
           <fieldset>

@@ -35,11 +35,4 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<Product> listAll(String keyword) {
-        if (keyword != null) {
-            return productRepository.search(keyword);
-        }
-        return productRepository.findAll();
-    }
-
 }

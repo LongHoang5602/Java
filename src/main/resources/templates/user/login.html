@@ -62,13 +62,12 @@
 </head>
 
 <body>
-  <th:block th:replace="~{layout :: header}"></th:block>
   <div class="container" style="margin: auto;">
     <div class="row justify-content-center" style="background-color: #d8ffff;height: 600px;
     width: 500px;
     margin: auto;
     color: #000000;
-    border-radius: 20px;">
+    border-radius: 20px; margin-top: 200px;">
       <div class="col-lg-6 col-md-8">
         <h3 class="card-title text-center" style="   margin-top: 40px;  font-size: 50px;">Login</h3>
         <form th:action="@{/login}" method="post">

@@ -45,7 +45,7 @@
 
 <body>
     <h2 style="text-align: center; padding-top: 100px;">Shopping Cart</h2>
-    <table style="padding: 100px;">
+    <table style="padding: 100px; padding-left: 500px;">
         <thead>
             <tr>
                 <th>Id</th>
@@ -66,10 +66,7 @@
                     <td th:text="${#numbers.sequence(1, 1000)[i.index]}"></td>
                     <td th:text="${product.name}"></td>
                     <td th:text="${product.price}"></td>
-                    <td>
-                        <input name="qty" type="number" th:value="${product.qty}" onblur="updateValue(this)"
-                            style="width: 50px;">
-                    </td>
+                    <td th:text="${product.qty}"></td>
                     <td th:text="${product.price * product.qty}"></td>
                     <td>
                         <button><a th:href="@{/shopping-cart/del/{id}(id=${product.productId})}">Remove</a></button>
@@ -80,14 +77,16 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4" style="text-align: right;">Tổng giá tiền:</td>
+                <td colspan="4" style="text-align: right;padding-left: 500px;">Tổng giá tiền:</td>
                 <td th:text="${Total}"></td>
             </tr>
 
         </tfoot>
     </table>
-    <button style="margin-left:100px ;"><a th:href="@{/shopping-cart/clear}">Clear Cart</a></button></br>
-    <button style="margin-left:100px ;margin-top: 10px;"><a th:href=" @{/products}">Back to home</a></button>
+    <button style="margin-left:100px ;margin-left: 500px;"><a th:href="@{/shopping-cart/clear}">Clear
+            Cart</a></button></br>
+    <button style="margin-left:100px ;margin-top: 10px;margin-left: 500px;"><a th:href=" @{/products}">Back to
+            home</a></button>
 
 </body>
 
